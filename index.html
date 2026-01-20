@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De Nobili School Sijua Alumni Association</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- YouTube Video Background -->
+  <div class="video-background">
+    <iframe 
+      src="https://www.youtube.com/embed/eaqaA70WXyQ?autoplay=1&loop=1&playlist=eaqaA70WXyQ&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&start=0&end=0&hd=1&vq=hd1080" 
+      frameborder="0" 
+      allow="autoplay; encrypted-media; accelerometer; gyroscope; picture-in-picture" 
+      allowfullscreen
+      class="video-iframe"
+      title="Background video"
+      id="youtube-background">
+    </iframe>
+    <div class="video-overlay"></div>
+  </div>
+
+  <div class="content-wrapper">
+<header>
+  <div class="header-inner">
+    <h1>De Nobili School, Sijua (Koradih)</h1>
+    <p>Dhanbad Alumni Association</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#register">Registration</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h2>Alumni Registration Portal</h2>
+    <p>Connecting former students of De Nobili School Sijua to preserve our legacy and values.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2>About the Alumni Association</h2>
+    <p>The De Nobili School Sijua (Koradih) Dhanbad Alumni Association brings together ex-students to foster unity, service, and continued contribution to the institution and society.</p>
+  </div>
+</section>
+
+<section id="gallery" class="gallery">
+  <div class="container">
+    <h2>Alumni Activities</h2>
+    <div class="gallery-grid">
+      <img src="alumni1.jpeg" alt="Alumni Event">
+      <img src="alumni2.jpeg" alt="Inauguration">
+      <img src="alumni3.jpeg" alt="Meeting">
+      <img src="alumni4.jpeg" alt="Discussion">
+      <img src="alumni5.jpeg" alt="Group Photo">
+    </div>
+  </div>
+</section>
+
+<section id="register">
+  <div class="container">
+    <h2>Life Membership Registration</h2>
+
+    <div class="register-box">
+      <p><strong>Registration Fee:</strong> ₹2500 (Life Membership)</p>
+      <p><strong>Payment Mode:</strong> UPI only</p>
+      <p><strong>UPI ID:</strong> denobilischool@upi</p>
+      <p>Please complete the UPI payment first and keep the Transaction ID ready.</p>
+    </div>
+
+    <!-- REGISTRATION FORM (Connect this to Google Form) -->
+    <form action="PASTE_GOOGLE_FORM_POST_URL_HERE" method="POST" target="_blank">
+      <div class="form-group">
+        <label for="name">Full Name of Alumnus <span class="required">*</span></label>
+        <input type="text" id="name" name="entry.1111111111" required placeholder="Enter your full name">
+      </div>
+
+      <div class="form-group">
+        <label for="mobile">Mobile Number <span class="required">*</span></label>
+        <input type="tel" id="mobile" name="entry.2222222222" required placeholder="10-digit mobile number">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="entry.3333333333" placeholder="your.email@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="year">Year of Passing <span class="required">*</span></label>
+        <input type="text" id="year" name="entry.4444444444" required placeholder="e.g., 2010">
+      </div>
+
+      <div class="form-group">
+        <label for="transaction">UPI Transaction ID <span class="required">*</span></label>
+        <input type="text" id="transaction" name="entry.5555555555" required placeholder="Enter your UPI transaction ID">
+        <small class="form-help">Copy the transaction ID from your UPI app after payment</small>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Permanent Address</label>
+        <textarea id="address" name="entry.6666666666" rows="3" placeholder="Enter your permanent address"></textarea>
+      </div>
+
+      <button class="btn" type="submit">Submit Registration</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2026 De Nobili School Sijua (Koradih) Dhanbad Alumni Association
+</footer>
+  </div>
+
+<script>
+  // Auto-scroll gallery images left to right
+  (function() {
+    const galleryGrid = document.querySelector('.gallery-grid');
+    if (!galleryGrid) return;
+    
+    const images = galleryGrid.querySelectorAll('img');
+    if (images.length === 0) return;
+    
+    let currentIndex = 0;
+    
+    function scrollToNext() {
+      // Move to next image (left to right)
+      currentIndex = (currentIndex + 1) % images.length;
+      const image = images[currentIndex];
+      
+      // Calculate scroll position to center the image
+      const scrollPosition = image.offsetLeft - (galleryGrid.offsetWidth - image.offsetWidth) / 2;
+      
+      // Smooth scroll to the next image
+      galleryGrid.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Start auto-scroll: wait 1.5 seconds on each image, then move to next (left to right only)
+    // First, scroll to the first image
+    setTimeout(() => {
+      if (images[0]) {
+        const firstScrollPosition = images[0].offsetLeft - (galleryGrid.offsetWidth - images[0].offsetWidth) / 2;
+        galleryGrid.scrollTo({
+          left: firstScrollPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+    
+    // Auto-scroll every 1.5 seconds (1500ms) - left to right only
+    setInterval(scrollToNext, 1500);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "dns-alumni-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static alumni site for De Nobili School, Sijua (Koradih)",
+  "scripts": {
+    "dev": "serve -l 4173",
+    "start": "serve -l 4173"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

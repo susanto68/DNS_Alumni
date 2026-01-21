@@ -193,19 +193,26 @@ h2{
   background:rgba(244, 246, 249, 0.05);
   -webkit-backdrop-filter:blur(0.5px);
   backdrop-filter:blur(0.5px);
-  padding:28px 0;
+  padding:0;
+  height:100vh;
+  overflow:hidden;
+}
+
+.gallery .container h2{
+  display:none;
 }
 
 .gallery-grid{
   display:flex;
   overflow-x:auto;
-  gap:20px;
-  padding:8px 15px 16px 15px;
-  margin-top:16px;
+  gap:0;
+  padding:0;
+  margin-top:0;
   -webkit-overflow-scrolling:touch;
   scroll-snap-type:x mandatory;
   scrollbar-width:thin;
   scroll-behavior:smooth;
+  height:100vh;
 }
 
 .gallery-grid::-webkit-scrollbar{
@@ -227,19 +234,18 @@ h2{
 }
 
 .gallery-grid img{
-  flex:0 0 95%;
-  width:95%;
-  height:auto;
-  max-height:500px;
+  flex:0 0 100vw;
+  width:100vw;
+  height:100vh;
   object-fit:contain;
-  border-radius:10px;
-  box-shadow:var(--shadow);
+  border-radius:0;
+  box-shadow:none;
   transition:transform 0.3s ease, box-shadow 0.3s ease;
   cursor:pointer;
   scroll-snap-align:center;
   scroll-snap-stop:always;
   background:var(--accent);
-  padding:8px;
+  padding:0;
 }
 
 .gallery-grid img:hover{
@@ -456,26 +462,26 @@ footer{
   }
   
   .gallery{
-    padding:18px 0;
+    padding:0;
+    height:100vh;
   }
   
-  .gallery h2{
-    font-size:1.3rem;
-    margin-bottom:10px;
-    padding:0 15px;
+  .gallery .container h2{
+    display:none;
   }
   
   .gallery-grid{
-    gap:14px;
-    padding:8px 15px 12px 15px;
-    margin-top:10px;
+    gap:0;
+    padding:0;
+    margin-top:0;
+    height:100vh;
   }
   
   .gallery-grid img{
-    flex:0 0 92%;
-    width:92%;
-    max-height:420px;
-    border-radius:12px;
+    flex:0 0 100vw;
+    width:100vw;
+    height:100vh;
+    border-radius:0;
   }
   
   .container h2{
@@ -597,26 +603,26 @@ footer{
   }
   
   .gallery{
-    padding:16px 0;
+    padding:0;
+    height:100vh;
   }
   
-  .gallery h2{
-    font-size:1.2rem;
-    margin-bottom:8px;
-    padding:0 15px;
+  .gallery .container h2{
+    display:none;
   }
   
   .gallery-grid{
-    gap:12px;
-    padding:6px 15px 10px 15px;
-    margin-top:8px;
+    gap:0;
+    padding:0;
+    margin-top:0;
+    height:100vh;
   }
   
   .gallery-grid img{
-    flex:0 0 94%;
-    width:94%;
-    max-height:380px;
-    border-radius:12px;
+    flex:0 0 100vw;
+    width:100vw;
+    height:100vh;
+    border-radius:0;
   }
   
   .container h2{

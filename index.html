@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>De Nobili School Sijua Alumni Association</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -144,7 +146,7 @@
       });
     }
     
-    // Start auto-scroll: wait 1.5 seconds on each image, then move to next (left to right only)
+    // Start auto-scroll: wait 2 seconds on each image, then move to next (left to right only)
     // First, scroll to the first image
     setTimeout(() => {
       if (images[0]) {
@@ -156,8 +158,8 @@
       }
     }, 100);
     
-    // Auto-scroll every 1.5 seconds (1500ms) - left to right only
-    setInterval(scrollToNext, 1500);
+    // Auto-scroll every 2 seconds (2000ms) - left to right only
+    setInterval(scrollToNext, 2000);
   })();
 </script>
 

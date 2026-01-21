@@ -121,50 +121,6 @@
   </div>
 
 <script>
-  // Prevent vertical scrolling on mobile when in gallery
-  (function() {
-    const gallery = document.querySelector('.gallery');
-    const galleryGrid = document.querySelector('.gallery-grid');
-    if (!gallery || !galleryGrid) return;
-    
-    let touchStartY = 0;
-    let touchStartX = 0;
-    let isScrolling = false;
-    
-    // Prevent body scroll when touching gallery
-    gallery.addEventListener('touchstart', function(e) {
-      touchStartY = e.touches[0].clientY;
-      touchStartX = e.touches[0].clientX;
-      isScrolling = false;
-    }, { passive: true });
-    
-    gallery.addEventListener('touchmove', function(e) {
-      if (!isScrolling) {
-        const touchY = e.touches[0].clientY;
-        const touchX = e.touches[0].clientX;
-        const diffY = Math.abs(touchY - touchStartY);
-        const diffX = Math.abs(touchX - touchStartX);
-        
-        // If horizontal scroll is greater, prevent vertical scroll
-        if (diffX > diffY) {
-          isScrolling = true;
-          document.body.style.overflow = 'hidden';
-          document.body.style.position = 'fixed';
-          document.body.style.width = '100%';
-        }
-      }
-    }, { passive: true });
-    
-    gallery.addEventListener('touchend', function() {
-      setTimeout(function() {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
-        isScrolling = false;
-      }, 100);
-    }, { passive: true });
-  })();
-  
   // Auto-scroll gallery images left to right
   (function() {
     const galleryGrid = document.querySelector('.gallery-grid');

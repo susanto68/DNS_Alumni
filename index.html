@@ -201,9 +201,8 @@
         <label for="photo">Photo</label>
         <div class="photo-upload-container">
           <div class="photo-upload-controls">
-            <input type="file" id="photo" name="entry.1515151515" accept="image/*" capture="user" style="display: none;">
-            <input type="hidden" id="photo-data" name="entry.1515151515">
-            <button type="button" class="btn-upload" onclick="document.getElementById('photo').click()">
+            <input type="file" id="photo" name="entry.1515151515" accept="image/*" style="display: none;">
+            <button type="button" class="btn-upload" id="btn-choose-file">
               <span>📁 Choose File</span>
             </button>
             <button type="button" class="btn-camera" onclick="openCamera()">
@@ -423,10 +422,18 @@
   function displayPhotoPreview(file) {
     const preview = document.getElementById('photo-preview');
     
+    if (!preview) return;
+    
     if (file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        preview.innerHTML = '<img src="' + e.target.result + '" alt="Photo preview">';
+        // Clear placeholder and show image
+        preview.innerHTML = '<img src="' + e.target.result + '" alt="Photo preview" style="width: 100%; height: 100%; object-fit: cover;">';
+        // Force display
+        preview.style.display = 'flex';
+      };
+      reader.onerror = function() {
+        preview.innerHTML = '<span class="photo-placeholder">Error loading image</span>';
       };
       reader.readAsDataURL(file);
     } else {
@@ -434,10 +441,34 @@
     }
   }
   
-  // Handle file input change
+  // Handle file input change and button click
   document.addEventListener('DOMContentLoaded', function() {
     const photoInput = document.getElementById('photo');
+    const btnChooseFile = document.getElementById('btn-choose-file');
     
+    // Handle Choose File button click (works on both desktop and mobile)
+    if (btnChooseFile && photoInput) {
+      // Click event for desktop
+      btnChooseFile.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        photoInput.click();
+      });
+      
+      // Touch event for mobile (additional support)
+      btnChooseFile.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        photoInput.click();
+      });
+      
+      // Also handle mousedown for better compatibility
+      btnChooseFile.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+      });
+    }
+    
+    // Handle file input change
     if (photoInput) {
       photoInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
@@ -446,8 +477,28 @@
           if (file.size > 2 * 1024 * 1024) {
             alert('File size exceeds 2MB limit. Please choose a smaller file.');
             photoInput.value = '';
+            displayPhotoPreview(null);
             return;
           }
+          
+          // Check file type
+          if (!file.type.match('image.*')) {
+            alert('Please select an image file (JPG, PNG, etc.)');
+            photoInput.value = '';
+            displayPhotoPreview(null);
+            return;
+          }
+          
+          displayPhotoPreview(file);
+        } else {
+          displayPhotoPreview(null);
+        }
+      });
+      
+      // Also handle input event for better compatibility
+      photoInput.addEventListener('input', function(e) {
+        const file = e.target.files[0];
+        if (file) {
           displayPhotoPreview(file);
         }
       });

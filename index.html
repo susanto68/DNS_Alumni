@@ -31,12 +31,11 @@
       <img src="logo.png" alt="De Nobili School Logo" class="school-logo" onerror="this.style.display='none';">
       <div class="school-info">
         <h1 class="school-name">De Nobili School, Koradih</h1>
-        <p class="school-details">English Medium co-education school, 10+2,</p>
         <p class="school-affiliation">Affiliated to C. I. S. C. E</p>
       </div>
     </div>
     <div class="header-right">
-      <p class="alumni-tagline">Dhanbad Alumni Association</p>
+      <p class="alumni-tagline">De Nobili School Sijua (Koradih) Alumni Association</p>
       <nav>
         <a href="#gallery">Gallery</a>
         <a href="#register">Registration</a>
@@ -59,7 +58,7 @@
     <h3>About the Alumni Association</h3>
 
     <p class="hero-about">
-      The De Nobili School Sijua (Koradih) Dhanbad Alumni Association aims to bring together
+      The De Nobili School Sijua (Koradih) Alumni Association aims to bring together
       former students to strengthen bonds, support the school community, and contribute to
       society through collaboration, guidance, and shared values.
     </p>
@@ -89,41 +88,205 @@
 
     <div class="register-box">
       <p><strong>Registration Fee:</strong> ₹2500 (Life Membership)</p>
-      <p><strong>Payment Mode:</strong> UPI only</p>
-      <p><strong>UPI ID:</strong> denobilischool@upi</p>
-      <p>Please complete the UPI payment first and keep the Transaction ID ready.</p>
+      <p><strong>Payment Mode:</strong> UPI / NEFT / Cheque</p>
+      <p><strong>UPI ID:</strong> 9931425493@indianbk</p>
+      <div class="qr-payment-container">
+        <a href="upi://pay?pa=9931425493@indianbk&pn=De%20Nobili%20School%20Sijua(Koradih)%20Alumni%20Association&am=2500&cu=INR" class="qr-link">
+          <img src="QR_Code.jpeg" alt="UPI QR Code" class="qr-image">
+        </a>
+        <p class="qr-caption">Click QR to Pay ₹2500</p>
+      </div>
     </div>
 
-    <form action="PASTE_GOOGLE_FORM_POST_URL_HERE" method="POST" target="_blank">
+    <!-- 
+      GOOGLE FORM SETUP:
+      1. Create a Google Form at https://forms.google.com (login: dnssijuaalumni@gmail.com)
+      2. Add fields matching the form below
+      3. Get the POST URL: https://docs.google.com/forms/d/e/FORM_ID/formResponse
+      4. Get entry IDs by inspecting the form source (search for "entry.")
+      5. Replace the action URL and all entry.XXXXX values below
+      
+      See GOOGLE_FORM_SETUP.md for detailed instructions
+    -->
+    <form action="PASTE_GOOGLE_FORM_POST_URL_HERE" method="POST" target="_blank" enctype="multipart/form-data">
+      
+      <!-- PERSONAL INFORMATION SECTION -->
+      <h3 class="form-section-title">Personal Information</h3>
+      
+      <!-- Replace entry.1111111111 with actual Google Form entry ID for Full Name -->
       <div class="form-group">
-        <label for="name">Full Name of Alumnus <span class="required">*</span></label>
+        <label for="name">Name of Alumnus <span class="required">*</span></label>
         <input type="text" id="name" name="entry.1111111111" required placeholder="Enter your full name">
       </div>
 
-      <div class="form-group">
-        <label for="mobile">Mobile Number <span class="required">*</span></label>
-        <input type="tel" id="mobile" name="entry.2222222222" required placeholder="10-digit mobile number">
+      <div class="form-row">
+        <!-- Replace entry.8888888888 with actual Google Form entry ID for Father's Name -->
+        <div class="form-group form-group-half">
+          <label for="fatherName">Father's Name</label>
+          <input type="text" id="fatherName" name="entry.8888888888" placeholder="Enter father's name">
+        </div>
+
+        <!-- Replace entry.9999999999 with actual Google Form entry ID for Mother's Name -->
+        <div class="form-group form-group-half">
+          <label for="motherName">Mother's Name</label>
+          <input type="text" id="motherName" name="entry.9999999999" placeholder="Enter mother's name">
+        </div>
       </div>
 
+      <!-- Replace entry.1010101010 with actual Google Form entry ID for Spouse Name -->
       <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="entry.3333333333" placeholder="your.email@example.com">
+        <label for="spouseName">Name of Spouse</label>
+        <input type="text" id="spouseName" name="entry.1010101010" placeholder="Enter spouse's name (if applicable)">
       </div>
 
+      <div class="form-row">
+        <!-- Replace entry.1212121212 with actual Google Form entry ID for Date of Birth -->
+        <div class="form-group form-group-half">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="entry.1212121212">
+        </div>
+
+        <!-- Replace entry.1313131313 with actual Google Form entry ID for Blood Group -->
+        <div class="form-group form-group-half">
+          <label for="bloodGroup">Blood Group</label>
+          <select id="bloodGroup" name="entry.1313131313">
+            <option value="">Select blood group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Replace entry.6666666666 with actual Google Form entry ID for Address -->
+      <div class="form-group">
+        <label for="address">Permanent Address <span class="required">*</span></label>
+        <textarea id="address" name="entry.6666666666" rows="3" required placeholder="Enter your complete permanent address"></textarea>
+      </div>
+
+      <div class="form-row">
+        <!-- Replace entry.2222222222 with actual Google Form entry ID for Mobile/Telephone -->
+        <div class="form-group form-group-half">
+          <label for="mobile">Telephone / Mobile Number <span class="required">*</span></label>
+          <input type="tel" id="mobile" name="entry.2222222222" required placeholder="10-digit mobile number">
+        </div>
+
+        <!-- Replace entry.3333333333 with actual Google Form entry ID for Email -->
+        <div class="form-group form-group-half">
+          <label for="email">Email Id. <span class="required">*</span></label>
+          <input type="email" id="email" name="entry.3333333333" required placeholder="your.email@example.com">
+        </div>
+      </div>
+
+      <!-- Replace entry.1414141414 with actual Google Form entry ID for Qualification -->
+      <div class="form-group">
+        <label for="qualification">Qualification</label>
+        <input type="text" id="qualification" name="entry.1414141414" placeholder="e.g. B.Tech, M.A., Ph.D., etc.">
+      </div>
+
+      <!-- Replace entry.7777777777 with actual Google Form entry ID for Designation -->
+      <div class="form-group">
+        <label for="designation">Designation / Current Profession</label>
+        <input type="text" id="designation" name="entry.7777777777" placeholder="e.g. Engineer, Teacher, Doctor, Business Owner">
+      </div>
+
+      <!-- Replace entry.1515151515 with actual Google Form entry ID for Photo -->
+      <div class="form-group">
+        <label for="photo">Photo</label>
+        <input type="file" id="photo" name="entry.1515151515" accept="image/*">
+        <small class="form-help">Upload your recent passport size photograph (JPG/PNG, max 2MB)</small>
+      </div>
+
+      <!-- ACADEMIC INFORMATION SECTION -->
+      <h3 class="form-section-title">Academic Information</h3>
+
+      <!-- Replace entry.1616161616 with actual Google Form entry ID for ICSE/ISC -->
+      <div class="form-group">
+        <label>1. ICSE (Class X) / ISC (Class XII) <span class="required">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="entry.1616161616" value="ICSE (Class X)" required>
+            <span>ICSE (Class X)</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="entry.1616161616" value="ISC (Class XII)" required>
+            <span>ISC (Class XII)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Replace entry.4444444444 with actual Google Form entry ID for Year of Passing -->
       <div class="form-group">
         <label for="year">Year of Passing <span class="required">*</span></label>
         <input type="text" id="year" name="entry.4444444444" required placeholder="e.g., 2010">
       </div>
 
+      <!-- Replace entry.1717171717 with actual Google Form entry ID for Last Class Attended -->
       <div class="form-group">
-        <label for="transaction">UPI Transaction ID <span class="required">*</span></label>
-        <input type="text" id="transaction" name="entry.5555555555" required placeholder="Enter your UPI transaction ID">
-        <small class="form-help">Copy the transaction ID from your UPI app after payment</small>
+        <label for="lastClass">2. Last Class Attended</label>
+        <input type="text" id="lastClass" name="entry.1717171717" placeholder="e.g., Class X, Class XII">
+      </div>
+
+      <!-- PAYMENT INFORMATION SECTION -->
+      <h3 class="form-section-title">Payment Information</h3>
+
+      <div class="form-group">
+        <label>Payment QR Code</label>
+        <div class="qr-payment-container">
+          <a href="upi://pay?pa=9931425493@indianbk&pn=De%20Nobili%20School%20Sijua(Koradih)%20Alumni%20Association&am=2500&cu=INR" class="qr-link" target="_blank">
+            <img src="QR_Code.jpeg" alt="UPI QR Code - Click to Pay ₹2500" class="qr-image">
+          </a>
+          <p class="qr-caption">Click QR Code to Pay ₹2500 via UPI</p>
+          <p class="qr-instruction">Scan with any UPI app or click to open payment directly</p>
+        </div>
+      </div>
+
+      <!-- Replace entry.5555555555 with actual Google Form entry ID for UPI Transaction ID -->
+      <div class="form-group">
+        <label for="transaction">UPI Transaction ID / Payment Reference <span class="required">*</span></label>
+        <input type="text" id="transaction" name="entry.5555555555" required placeholder="Enter your UPI transaction ID or payment reference number">
+        <small class="form-help">After making payment via QR code above, copy the transaction ID from your UPI app and paste it here. For NEFT/Cheque, enter transaction reference number.</small>
+      </div>
+
+      <!-- MEMBERSHIP STATUS SECTION (For Admin/Internal Use) -->
+      <h3 class="form-section-title">Membership Status</h3>
+
+      <!-- Replace entry.1818181818 with actual Google Form entry ID for Membership Status -->
+      <div class="form-group">
+        <label for="membershipStatus">Membership Status</label>
+        <select id="membershipStatus" name="entry.1818181818">
+          <option value="">Select status</option>
+          <option value="Approved">Approved</option>
+          <option value="Waiting">Waiting</option>
+          <option value="Denied">Denied</option>
+        </select>
+      </div>
+
+      <!-- Replace entry.1919191919 with actual Google Form entry ID for ECM Date -->
+      <div class="form-group">
+        <label for="ecmDate">ECM Date</label>
+        <input type="date" id="ecmDate" name="entry.1919191919">
+      </div>
+
+      <!-- AGREEMENT SECTION -->
+      <div class="form-group">
+        <!-- Replace entry.2020202020 with actual Google Form entry ID for Alumnus Agreement -->
+        <label class="checkbox-label">
+          <input type="checkbox" name="entry.2020202020" value="I agree" required>
+          <span>I hereby declare that the information provided above is true and correct to the best of my knowledge. <span class="required">*</span></span>
+        </label>
       </div>
 
       <div class="form-group">
-        <label for="address">Permanent Address</label>
-        <textarea id="address" name="entry.6666666666" rows="3" placeholder="Enter your permanent address"></textarea>
+        <small class="form-help">
+          <strong>Note:</strong> Please attach Pass Certificate or any Other School Document for proof. 
+          Cheque to be drawn in favour of "DE NOBILI SCHOOL SIJUA(KORADIH) ALUMNI ASSOCIATION"
+        </small>
       </div>
 
       <button class="btn" type="submit">Submit Registration</button>
@@ -133,7 +296,7 @@
 
 <footer>
   <div class="footer-content">
-    <p class="footer-copyright">© 2026 De Nobili School Sijua (Koradih) Dhanbad Alumni Association</p>
+    <p class="footer-copyright">© 2026 De Nobili School Sijua (Koradih) Alumni Association</p>
     <div class="footer-design">
       <img src="susanto.jpg" alt="Susanto Ganguly" class="designer-logo" onerror="this.style.display='none';">
       <p class="footer-credit">All Rights Reserved | Design by Susanto Ganguly</p>

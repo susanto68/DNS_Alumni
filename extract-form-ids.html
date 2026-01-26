@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Form Entry ID Extractor</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #0b3c6d;
+      margin-bottom: 20px;
+    }
+    .step {
+      background: #f8f9fa;
+      padding: 15px;
+      margin: 15px 0;
+      border-left: 4px solid #0b3c6d;
+      border-radius: 4px;
+    }
+    .step h3 {
+      margin-top: 0;
+      color: #0b3c6d;
+    }
+    code {
+      background: #e9ecef;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+    .warning {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 15px 0;
+    }
+    .success {
+      background: #d4edda;
+      border: 1px solid #28a745;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 15px 0;
+    }
+    button {
+      background: #0b3c6d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background: #072b4e;
+    }
+    #results {
+      margin-top: 20px;
+      display: none;
+    }
+    .result-item {
+      background: #e7f3ff;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+      border-left: 3px solid #0b3c6d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Google Form Entry ID Extractor</h1>
+    
+    <div class="step">
+      <h3>Method 1: Using Browser Console (Easiest)</h3>
+      <ol>
+        <li>Open your Google Form in a new tab</li>
+        <li>Press <code>F12</code> or right-click → <strong>Inspect</strong></li>
+        <li>Go to the <strong>Console</strong> tab</li>
+        <li>Paste and run this code:</li>
+      </ol>
+      <pre>// Copy and paste this into the browser console on your Google Form page
+(function() {
+  const form = document.querySelector('form');
+  if (!form) {
+    console.error('Form not found! Make sure you are on the Google Form page.');
+    return;
+  }
+  
+  const formAction = form.action;
+  console.log('%c📋 FORM POST URL:', 'color: #0b3c6d; font-weight: bold; font-size: 14px;');
+  console.log(formAction);
+  console.log('\n%c📝 FIELD ENTRY IDs:', 'color: #0b3c6d; font-weight: bold; font-size: 14px;');
+  
+  const inputs = form.querySelectorAll('input, textarea, select');
+  const entries = [];
+  
+  inputs.forEach((input, index) => {
+    if (input.name && input.name.startsWith('entry.')) {
+      const label = input.closest('[role="listitem"]') || 
+                   input.closest('.freebirdFormviewerViewItemsItemItem') ||
+                   input.closest('.Qr7Oae');
+      const labelText = label ? 
+        (label.querySelector('label')?.textContent || 
+         label.querySelector('.M7eMe')?.textContent ||
+         label.querySelector('[aria-label]')?.getAttribute('aria-label') ||
+         'Field ' + (index + 1)) : 'Field ' + (index + 1);
+      
+      entries.push({
+        entryId: input.name,
+        label: labelText.trim(),
+        type: input.type || input.tagName.toLowerCase()
+      });
+      
+      console.log(`%c${labelText}`, 'color: #28a745; font-weight: bold;');
+      console.log(`  Entry ID: ${input.name}`);
+      console.log(`  Type: ${input.type || input.tagName.toLowerCase()}\n`);
+    }
+  });
+  
+  console.log('\n%c📋 COPY THIS TO YOUR HTML:', 'color: #d32f2f; font-weight: bold; font-size: 14px;');
+  console.log(`Form Action: ${formAction}\n`);
+  entries.forEach((entry, i) => {
+    console.log(`${entry.label}: ${entry.entryId}`);
+  });
+  
+  // Copy to clipboard if possible
+  if (navigator.clipboard) {
+    const textToCopy = `Form Action: ${formAction}\n\n${entries.map(e => `${e.label}: ${e.entryId}`).join('\n')}`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      console.log('\n%c✅ Copied to clipboard!', 'color: #28a745; font-weight: bold;');
+    });
+  }
+})();</pre>
+    </div>
+
+    <div class="step">
+      <h3>Method 2: View Page Source</h3>
+      <ol>
+        <li>Open your Google Form</li>
+        <li>Right-click on the page → <strong>View Page Source</strong> (or press <code>Ctrl+U</code>)</li>
+        <li>Press <code>Ctrl+F</code> and search for <code>"entry.</code></li>
+        <li>You'll see entries like <code>entry.123456789</code></li>
+        <li>Match them with the field labels in the HTML</li>
+      </ol>
+    </div>
+
+    <div class="step">
+      <h3>Method 3: Network Tab</h3>
+      <ol>
+        <li>Open your Google Form</li>
+        <li>Press <code>F12</code> → Go to <strong>Network</strong> tab</li>
+        <li>Fill out and submit the form</li>
+        <li>Look for a request to <code>formResponse</code></li>
+        <li>Check the <strong>Payload</strong> tab to see all entry IDs</li>
+      </ol>
+    </div>
+
+    <div class="warning">
+      <strong>⚠️ Important:</strong> Make sure you're logged into Google Forms with the account: <strong>dnssijuaalumni@gmail.com</strong>
+    </div>
+
+    <div class="success">
+      <strong>✅ After getting the Entry IDs:</strong>
+      <ol>
+        <li>Open <code>index.html</code> in your editor</li>
+        <li>Find the form section (around line 101)</li>
+        <li>Replace <code>PASTE_GOOGLE_FORM_POST_URL_HERE</code> with your form POST URL</li>
+        <li>Replace all <code>entry.1111111111</code>, <code>entry.2222222222</code>, etc. with your actual entry IDs</li>
+        <li>Save and test the form!</li>
+      </ol>
+    </div>
+
+    <h2>Quick Reference: Current HTML Field Names</h2>
+    <div class="result-item">
+      <strong>Full Name of Alumnus:</strong> <code>entry.1111111111</code> (replace this)
+    </div>
+    <div class="result-item">
+      <strong>Designation / Current Profession:</strong> <code>entry.7777777777</code> (replace this)
+    </div>
+    <div class="result-item">
+      <strong>Mobile Number:</strong> <code>entry.2222222222</code> (replace this)
+    </div>
+    <div class="result-item">
+      <strong>Email Address:</strong> <code>entry.3333333333</code> (replace this)
+    </div>
+    <div class="result-item">
+      <strong>Year of Passing:</strong> <code>entry.4444444444</code> (replace this)
+    </div>
+    <div class="result-item">
+      <strong>UPI Transaction ID:</strong> <code>entry.5555555555</code> (replace this)
+    </div>
+    <div class="result-item">
+      <strong>Permanent Address:</strong> <code>entry.6666666666</code> (replace this)
+    </div>
+  </div>
+
+  <script>
+    // This page is just a helper guide - the actual extraction happens in the browser console
+    // on the Google Form page itself
+  </script>
+</body>
+</html>

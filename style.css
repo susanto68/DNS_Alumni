@@ -20,6 +20,10 @@ body {
   z-index: -1;
   overflow: hidden;
   background: #000;
+  /* Optimize for video quality */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: contents;
 }
 
 .video-iframe {
@@ -34,9 +38,19 @@ body {
   object-fit: cover;
   pointer-events: none;
   border: none;
-  opacity: 1; /* Full opacity for clear video */
-  image-rendering: high-quality;
-  -webkit-transform: translate(-50%, -50%);
+  opacity: 1;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-transform: translate(-50%, -50%) translateZ(0);
+  transform: translate(-50%, -50%) translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  /* Force hardware acceleration for better quality */
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 /* Minimal overlay for text readability (set to transparent for maximum video clarity) */
@@ -46,9 +60,12 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0); /* Transparent for clear video like YouTube */
+  background: rgba(0, 0, 0, 0); /* Completely transparent for maximum video clarity */
   z-index: 1;
   pointer-events: none;
+  /* Ensure overlay doesn't affect video quality */
+  opacity: 0;
+  will-change: auto;
 }
 
 /* Content wrapper to appear above video */

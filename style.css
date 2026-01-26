@@ -579,6 +579,202 @@ input[type="file"]::-webkit-file-upload-button:hover {
   background: #072b4e;
 }
 
+/* PHOTO UPLOAD WITH CAMERA */
+.photo-upload-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.photo-upload-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-upload,
+.btn-camera {
+  background: #0b3c6d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-upload:hover,
+.btn-camera:hover {
+  background: #072b4e;
+}
+
+.btn-camera {
+  background: #28a745;
+}
+
+.btn-camera:hover {
+  background: #218838;
+}
+
+.photo-preview-container {
+  flex: 0 0 150px;
+}
+
+.photo-preview {
+  width: 150px;
+  height: 150px;
+  border: 3px solid #0b3c6d;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  color: #999;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 10px;
+}
+
+/* CAMERA MODAL */
+.camera-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(5px);
+}
+
+.camera-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.camera-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.camera-modal-header h3 {
+  margin: 0;
+  color: #0b3c6d;
+  font-size: 1.3rem;
+}
+
+.camera-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.camera-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.camera-preview-container {
+  position: relative;
+  width: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+#camera-video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.camera-controls {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  justify-content: center;
+  border-top: 1px solid #ddd;
+}
+
+.btn-capture,
+.btn-cancel {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-capture {
+  background: #28a745;
+  color: white;
+}
+
+.btn-capture:hover {
+  background: #218838;
+}
+
+.btn-cancel {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background: #5a6268;
+}
+
 input[type="date"] {
   cursor: pointer;
 }
@@ -764,6 +960,43 @@ footer {
   .radio-group {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .photo-upload-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .photo-preview-container {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .photo-preview {
+    width: 100%;
+    max-width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .camera-modal-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .camera-preview-container {
+    min-height: 300px;
+  }
+
+  .camera-controls {
+    flex-direction: column;
+  }
+
+  .btn-capture,
+  .btn-cancel {
+    width: 100%;
   }
 
   input, textarea, select {

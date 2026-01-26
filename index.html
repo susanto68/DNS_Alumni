@@ -199,8 +199,42 @@
       <!-- Replace entry.1515151515 with actual Google Form entry ID for Photo -->
       <div class="form-group">
         <label for="photo">Photo</label>
-        <input type="file" id="photo" name="entry.1515151515" accept="image/*">
-        <small class="form-help">Upload your recent passport size photograph (JPG/PNG, max 2MB)</small>
+        <div class="photo-upload-container">
+          <div class="photo-upload-controls">
+            <input type="file" id="photo" name="entry.1515151515" accept="image/*" capture="user" style="display: none;">
+            <input type="hidden" id="photo-data" name="entry.1515151515">
+            <button type="button" class="btn-upload" onclick="document.getElementById('photo').click()">
+              <span>📁 Choose File</span>
+            </button>
+            <button type="button" class="btn-camera" onclick="openCamera()">
+              <span>📷 Take Selfie</span>
+            </button>
+          </div>
+          <div class="photo-preview-container">
+            <div id="photo-preview" class="photo-preview">
+              <span class="photo-placeholder">No photo selected</span>
+            </div>
+          </div>
+        </div>
+        <small class="form-help">Upload your recent passport size photograph (JPG/PNG, max 2MB) or take a selfie</small>
+      </div>
+      
+      <!-- Camera Modal -->
+      <div id="camera-modal" class="camera-modal">
+        <div class="camera-modal-content">
+          <div class="camera-modal-header">
+            <h3>Take a Selfie</h3>
+            <button type="button" class="camera-close" onclick="closeCamera()">&times;</button>
+          </div>
+          <div class="camera-preview-container">
+            <video id="camera-video" autoplay playsinline></video>
+            <canvas id="camera-canvas" style="display: none;"></canvas>
+          </div>
+          <div class="camera-controls">
+            <button type="button" class="btn-capture" onclick="capturePhoto()">📸 Capture</button>
+            <button type="button" class="btn-cancel" onclick="closeCamera()">Cancel</button>
+          </div>
+        </div>
       </div>
 
       <!-- ACADEMIC INFORMATION SECTION -->
@@ -307,6 +341,119 @@
   </div>
 
 <script>
+  // Camera and Photo Upload Functions
+  let cameraStream = null;
+  
+  function openCamera() {
+    const modal = document.getElementById('camera-modal');
+    const video = document.getElementById('camera-video');
+    
+    modal.classList.add('active');
+    
+    // Request camera access
+    navigator.mediaDevices.getUserMedia({ 
+      video: { 
+        facingMode: 'user', // Front camera for selfie
+        width: { ideal: 1280 },
+        height: { ideal: 720 }
+      },
+      audio: false 
+    })
+    .then(function(stream) {
+      cameraStream = stream;
+      video.srcObject = stream;
+      video.play();
+    })
+    .catch(function(err) {
+      console.error('Error accessing camera:', err);
+      alert('Unable to access camera. Please check permissions or use file upload instead.');
+      closeCamera();
+    });
+  }
+  
+  function closeCamera() {
+    const modal = document.getElementById('camera-modal');
+    const video = document.getElementById('camera-video');
+    
+    // Stop camera stream
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(track => track.stop());
+      cameraStream = null;
+    }
+    
+    if (video.srcObject) {
+      video.srcObject = null;
+    }
+    
+    modal.classList.remove('active');
+  }
+  
+  function capturePhoto() {
+    const video = document.getElementById('camera-video');
+    const canvas = document.getElementById('camera-canvas');
+    const context = canvas.getContext('2d');
+    
+    // Set canvas dimensions to match video
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    
+    // Draw video frame to canvas
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    // Convert canvas to blob and create file
+    canvas.toBlob(function(blob) {
+      const file = new File([blob], 'selfie.jpg', { type: 'image/jpeg' });
+      
+      // Create a FileList-like object
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      
+      // Set the file input
+      const photoInput = document.getElementById('photo');
+      photoInput.files = dataTransfer.files;
+      
+      // Display preview
+      displayPhotoPreview(file);
+      
+      // Close camera
+      closeCamera();
+    }, 'image/jpeg', 0.9);
+  }
+  
+  function displayPhotoPreview(file) {
+    const preview = document.getElementById('photo-preview');
+    
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.innerHTML = '<img src="' + e.target.result + '" alt="Photo preview">';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      preview.innerHTML = '<span class="photo-placeholder">No photo selected</span>';
+    }
+  }
+  
+  // Handle file input change
+  document.addEventListener('DOMContentLoaded', function() {
+    const photoInput = document.getElementById('photo');
+    
+    if (photoInput) {
+      photoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          // Check file size (2MB limit)
+          if (file.size > 2 * 1024 * 1024) {
+            alert('File size exceeds 2MB limit. Please choose a smaller file.');
+            photoInput.value = '';
+            return;
+          }
+          displayPhotoPreview(file);
+        }
+      });
+    }
+  });
+  
   // Optimize video quality on load
   (function() {
     const videoIframe = document.getElementById('youtube-background');
